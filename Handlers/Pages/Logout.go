@@ -1,7 +1,6 @@
 package app
 
 import (
-	"fmt"
 	"net/http"
 )
 
@@ -16,7 +15,6 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	f := db.QueryRow(post, name.Value)
 	var deja int
 	f.Scan(&deja)
-	fmt.Println(deja)
 	if deja == 1 {
 		db.Exec(`UPDATE User SET deja = ? WHERE username = ?`, 0, name.Value)
 	}

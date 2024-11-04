@@ -13,7 +13,7 @@ type Err struct {
 
 func ErrorHandler(w http.ResponseWriter, n int) {
 	w.WriteHeader(n)
-	template, err := template.ParseFiles("error.html")
+	template, err := template.ParseFiles("../templates/pages/error.html")
 	if err != nil {
 		http.Error(w, Errors[n].Tittle, n)
 		return

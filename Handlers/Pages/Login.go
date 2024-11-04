@@ -36,10 +36,15 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 	c := http.Cookie{
 		Name:     "username",
 		Value:    name,
-		Expires:  time.Now().Add(24 * time.Hour),
+		Expires:  time.Now().Add(1 * time.Minute),
 		Secure:   true,
 		HttpOnly: true,
 	}
+	// if time.Now().After(c.Expires) {
+	// 	Logout(w, r)
+	// 	deja = 0
+	// 	return
+	// }
 	if deja == 0 {
 		db.Exec(`UPDATE User SET deja = ? WHERE username = ?`, 1, name)
 	} else {

@@ -1,128 +1,148 @@
-:root {
-    --bg-dark: #24292e;
-    --text-light: #ffffff;
-    --bg-light: #fafafa;
-    --border-light: #ddd;
-    --link-dark: #586069;
-    --link-hover: #6d829b;
-}
-
+/* General Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: Arial, sans-serif;
 }
 
 body {
-    background-color: #e0e0e0;
-    color: #333;}
-
-header {
-    background-color: var(--bg-dark);
-    padding: 1rem;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
 }
 
+a {
+    text-decoration: none;
+    color: #3498db;
+}
+
+/* Header Styles */
 .header-container {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-    color: var(--text-light);
+.header-container h1 {
     font-size: 2rem;
-    letter-spacing: 1px;
-    font-family: 'Press Start 2P', cursive;
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    gap: 1rem;
+}
+
+.nav-links li {
+    margin-left: 20px;
 }
 
 .nav-link {
-    color: var(--text-light);
-    text-decoration: none;
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    background-color: var(--link-dark);
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-    font-family: 'Press Start 2P', cursive;
+    color: white;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
 }
 
 .nav-link:hover {
-    background-color: var(--link-hover);
+    color: #1abc9c;
 }
 
+/* Main Content */
 main {
     max-width: 1200px;
     margin: 2rem auto;
-    padding: 0 2rem;
-    background-color: var(--text-light);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    padding: 0 20px;
 }
 
 .forum-intro {
-    padding: 2rem;
-    background-color: #f4f4f4;
     text-align: center;
+    margin-bottom: 2rem;
 }
 
 .forum-intro h2 {
-    color: var(--bg-dark);
-    font-size: 1.8rem;
-    font-family: 'Press Start 2P', cursive;
+    font-size: 2rem;
+    color: #2c3e50;
 }
 
 .forum-intro p {
-    font-size: 1.1rem;
-    color: #555;
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin: 10px 0;
 }
 
+.create-post-btn {
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.create-post-btn:hover {
+    background-color: #16a085;
+}
+
+/* Posts Section */
 .posts {
-    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
 }
 
 .post-item {
-    margin-bottom: 1.5rem;
+    background-color: white;
     padding: 1.5rem;
-    background-color: var(--bg-light);
-    border: 1px solid var(--border-light);
-    border-radius: 6px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
 }
 
-.post-title {
+.post-item:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.post-item h3 {
     font-size: 1.5rem;
-    color: var(--link-hover);
+    color: #2c3e50;
     margin-bottom: 0.5rem;
 }
 
-.post-date {
-    font-size: 0.85rem;
-    color: #888;
+.post-item time {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    display: block;
+    margin-bottom: 0.5rem;
 }
 
-.post-author {
+.post-item .author {
     font-size: 0.9rem;
-    color: #555;
+    color: #7f8c8d;
     margin-bottom: 1rem;
 }
 
-.post-content {
-    font-size: 1rem;
-    color: #333;
+.post-item .content {
+    font-size: 1.1rem;
+    color: #34495e;
     line-height: 1.6;
 }
 
+/* Footer */
 footer {
+    background-color: #2c3e50;
+    color: white;
     text-align: center;
-    padding: 1rem;
-    background-color: var(--bg-dark);
-    color: var(--text-light);
-    font-size: 0.85rem;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+    font-size: 1rem;
 }

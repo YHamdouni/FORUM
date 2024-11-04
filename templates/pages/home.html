@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/home.css">
     <title>##@#@</title>
-    
 </head>
 <body>
     <header>
@@ -15,32 +14,33 @@
                 <ul class="nav-links">
                     <li><a href="register" class="nav-link">Sign Up</a></li>
                     <li><a href="login" class="nav-link">Log In</a></li>
+                    <li><a href="logout" class="nav-link">Log Out</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main>
-        <button onclick="location.href='/posts/create'">Create a post</button>
         <section class="forum-intro">
             <h2>Welcome to ##@#@</h2>
             <p>Join the conversation and share your ideas.</p>
+            <button class="create-post-btn" onclick="location.href=`/createPost`" >Create a post</button>
         </section>
 
         <section class="posts">
             {{ range .Posts }}
-            <div class="post-item">
+            <article class="post-item">
                 <h3>{{ .Title }}</h3>
                 <time datetime="{{ .CreatedAt }}">{{ .CreatedAt }}</time>
                 <p class="author">Posted by {{ .UserID }}</p>
                 <div class="content">{{ .Content }}</div>
-            </div>
+            </article>
             {{ end }}
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 ##@#@</p>
+        <p>&copy; 2024 ##@#@. All rights reserved.</p>
     </footer>
 </body>
 </html>
