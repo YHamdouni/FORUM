@@ -12,7 +12,9 @@
             <h1>{.Name}</h1>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="logout" class="nav-link">Log Out</a></li>
+                    <form action="/logout" method="post">
+                        <input type="submit" value="log out" class="nav-link">
+                    </form>
                 </ul>
             </nav>
         </div>
