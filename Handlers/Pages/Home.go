@@ -2,10 +2,22 @@ package app
 
 import (
 	"html/template"
+	"log"
 	"net/http"
 )
 
 func Home(w http.ResponseWriter, r *http.Request) {
-	temp, _ := template.ParseFiles("../templates/pages/home.html")
-	temp.Execute(w, "name.Value")
+	_, err := r.Cookie("username")
+	if err != nil {
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+		return
+	}
+	template, err := template.ParseFiles("../templates/pages/home.html")
+	if err != nil {
+		log.Fatal("error in page home")
+	}
+	err = template.Execute(w, "name.Value")
+	if err != nil {
+		log.Fatal("error in executing template of home")
+	}
 }

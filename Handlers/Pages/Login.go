@@ -2,6 +2,7 @@ package app
 
 import (
 	"html/template"
+	"log"
 	"net/http"
 	"time"
 )
@@ -11,26 +12,29 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
-	temp, _ := template.ParseFiles("../templates/pages/login.html")
+	template, err := template.ParseFiles("../templates/pages/login.html")
+	if err != nil {
+		log.Fatal("error in page login")
+	}
 	name := r.FormValue("name")
 	pass := r.FormValue("password")
 
 	if name == "" || pass == "" {
 		w.WriteHeader(http.StatusBadRequest)
-		temp.Execute(w, "please fill the form!")
+		template.Execute(w, "please fill the form!")
 		return
 	}
 	post := `select password_hash,deja from user where username = ?`
 	f := db.QueryRow(post, name)
 	if f.Err() != nil {
-		temp.Execute(w, "username not found !")
+		template.Execute(w, "username not found !")
 		return
 	}
 	var passw string
 	var deja int
 	f.Scan(&passw, &deja)
 	if pass != passw {
-		temp.Execute(w, "incorrect password !")
+		template.Execute(w, "incorrect password !")
 		return
 	}
 	c := http.Cookie{
@@ -40,15 +44,10 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 		Secure:   true,
 		HttpOnly: true,
 	}
-	// if time.Now().After(c.Expires) {
-	// 	Logout(w, r)
-	// 	deja = 0
-	// 	return
-	// }
 	if deja == 0 {
 		db.Exec(`UPDATE User SET deja = ? WHERE username = ?`, 1, name)
 	} else {
-		temp.Execute(w, "walalala")
+		template.Execute(w, "walalala")
 		return
 	}
 	http.SetCookie(w, &c)
@@ -56,6 +55,12 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {
-	temp, _ := template.ParseFiles("../templates/pages/login.html")
-	temp.Execute(w, nil)
+	template, err := template.ParseFiles("../templates/pages/login.html")
+	if err != nil {
+		log.Fatal("error in page login")
+	}
+	err = template.Execute(w, nil)
+	if err != nil {
+		log.Fatal("error in executing template of login")
+	}
 }

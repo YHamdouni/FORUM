@@ -16,5 +16,6 @@ func RegisterRoutes(database *sql.DB) {
 	http.HandleFunc("/home", Pages.Home)
 	http.HandleFunc("/",Pages.Index)
 	http.HandleFunc("/createPost",Pages.Newpost)
+	http.HandleFunc("/submit-post",Pages.SubmitPost)
 	http.HandleFunc("/logout", Pages.Logout)
 }

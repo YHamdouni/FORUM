@@ -32,8 +32,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	Files.RegisterRoutes(db) // Pass db to the route registration function
-
+	Files.RegisterRoutes(db)
 	fmt.Println("Server running at http://localhost:8080")
 	err = http.ListenAndServe(":8080", nil)
 	if err != nil {
