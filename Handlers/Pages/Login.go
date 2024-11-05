@@ -52,7 +52,7 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	http.SetCookie(w, &c)
-	http.Redirect(w, r, "/", http.StatusMovedPermanently)
+	http.Redirect(w, r, "/home", http.StatusMovedPermanently)
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {

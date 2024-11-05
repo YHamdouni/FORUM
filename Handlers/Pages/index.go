@@ -6,8 +6,8 @@ import (
 	"net/http"
 )
 
-func Newpost(w http.ResponseWriter, r *http.Request) {
-	template, err := template.ParseFiles("../templates/pages/Createpost.html")
+func Index(w http.ResponseWriter, r *http.Request) {
+	template, err := template.ParseFiles("../templates/pages/index.html")
 	if err != nil {
 		log.Fatal("error in page create post")
 	}
@@ -15,5 +15,4 @@ func Newpost(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal("error in executing template of creating post")
 	}
-	http.Redirect(w, r, "/home", http.StatusMovedPermanently)
 }

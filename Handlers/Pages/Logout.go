@@ -18,5 +18,5 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	if deja == 1 {
 		db.Exec(`UPDATE User SET deja = ? WHERE username = ?`, 0, name.Value)
 	}
-	http.Redirect(w, r, "/login", http.StatusMovedPermanently)
+	http.Redirect(w, r, "/", http.StatusMovedPermanently)
 }
