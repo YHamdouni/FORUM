@@ -16,7 +16,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal("error in page home")
 	}
-	err = template.Execute(w, "name.Value")
+	err = template.Execute(w, nil)
 	if err != nil {
 		log.Fatal("error in executing template of home")
 	}

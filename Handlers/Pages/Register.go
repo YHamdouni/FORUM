@@ -29,9 +29,9 @@ func HandleRegister(w http.ResponseWriter, r *http.Request) {
 		template.Execute(w, "please fill the form!")
 		return
 	}
-	post := `INSERT INTO User (email,username,password_hash)
+	user := `INSERT INTO User (email,username,password_hash)
 	VALUES (?, ?, ?)`
-	_, err = db.Exec(post, email, name, pass)
+	_, err = db.Exec(user, email, name, pass)
 	if err != nil {
 		template.Execute(w, "email or name already exists")
 	}

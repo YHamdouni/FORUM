@@ -40,7 +40,7 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 	c := http.Cookie{
 		Name:     "username",
 		Value:    name,
-		Expires:  time.Now().Add(1 * time.Minute),
+		Expires:  time.Now().Add(1 * time.Hour),
 		Secure:   true,
 		HttpOnly: true,
 	}

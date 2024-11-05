@@ -31,13 +31,21 @@ func Newpost(w http.ResponseWriter, r *http.Request) {
 
 func SubmitPost(w http.ResponseWriter, r *http.Request) {
 	post := Posts{Title: r.FormValue("title"), Content: r.FormValue("content")}
+	usename := `INSERT FROM User(username)`
 	_, err := db.Exec(`
 	CREATE TABLE IF NOT EXISTS Posts (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		text TEXT UNIQUE NOT NULL,
 		username TEXT UNIQUE NOT NULL,
+		title TEXT UNIQUE NOT NULL,
+		content TEXT UNIQUE NOT NULL
 	);
 	`)
+	p := `INSERT INTO Posts (username,title,content)
+	VALUES (?, ?)`
+	_, err = db.Exec(p, usename, post.Title, post.Content)
+	if err != nil {
+		log.Fatal("aji hnaya")
+	}
 	if err != nil {
 		log.Fatal(err)
 	}
