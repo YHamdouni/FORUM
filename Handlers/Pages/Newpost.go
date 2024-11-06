@@ -4,11 +4,16 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"time"
 )
 
 type Posts struct {
-	Title   string
-	Content string
+	Username string
+	Title    string
+	Category string
+	Content  string
+	Date     string
+	Time     string
 }
 
 func Newpost(w http.ResponseWriter, r *http.Request) {
@@ -28,15 +33,22 @@ func Newpost(w http.ResponseWriter, r *http.Request) {
 }
 
 func SubmitPost(w http.ResponseWriter, r *http.Request) {
-	post := Posts{Title: r.FormValue("title"), Content: r.FormValue("content")}
+	now := time.Now()
+	post := Posts{
+		Title:    r.FormValue("title"),
+		Category: r.FormValue("category"),
+		Content:  r.FormValue("content"),
+		Date:     now.Format("2006-01-02"),
+		Time:     now.Format("15:04:05"),
+	}
 	cookie, err := r.Cookie("username")
 	if err != nil {
 		http.Redirect(w, r, "/", http.StatusSeeOther)
 		return
 	}
 	username := cookie.Value
-	p := `INSERT INTO Posts (username, title, content) VALUES (?, ?, ?)`
-	_, err = db.Exec(p, username, post.Title, post.Content)
+	p := `INSERT INTO Posts (username, title, category, content, date, time) VALUES (?, ?, ?, ?, ?, ?)`
+	_, err = db.Exec(p, username, post.Title, post.Category, post.Content, post.Date, post.Time)
 	if err != nil {
 		log.Fatal("Error inserting post: ", err)
 	}

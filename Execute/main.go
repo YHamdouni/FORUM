@@ -41,15 +41,18 @@ func main() {
 	}
 }
 func InitDB() {
-    _, err := db.Exec(`
+	_, err := db.Exec(`
     CREATE TABLE IF NOT EXISTS Posts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT NOT NULL,
+		category TEXT NOT NULL,
         title TEXT UNIQUE NOT NULL,
-        content TEXT NOT NULL
+        content TEXT NOT NULL,
+		date DATE, 
+		time TIME
     );
     `)
-    if err != nil {
-        log.Fatal("Error creating Posts table: ", err)
-    }
+	if err != nil {
+		log.Fatal("Error creating Posts table: ", err)
+	}
 }

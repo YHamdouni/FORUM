@@ -19,7 +19,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	}
 	Username := cookie.Value
 
-	rows, err := db.Query("SELECT title, content FROM Posts")
+	rows, err := db.Query("SELECT username, title, category, content, date, time FROM Posts")
 	if err != nil {
 		log.Printf("Error fetching posts: %v", err)
 		http.Error(w, "Could not load posts.", http.StatusInternalServerError)
@@ -30,7 +30,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	var posts []Posts
 	for rows.Next() {
 		var post Posts
-		if err := rows.Scan(&post.Title, &post.Content); err != nil {
+		if err := rows.Scan(&post.Username, &post.Title, &post.Category, &post.Content, &post.Date, &post.Time); err != nil {
 			log.Printf("Error scanning posts: %v", err)
 			http.Error(w, "Error loading posts.", http.StatusInternalServerError)
 			return
