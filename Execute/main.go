@@ -32,10 +32,24 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	InitDB()
 	Files.RegisterRoutes(db)
 	fmt.Println("Server running at http://localhost:8080")
 	err = http.ListenAndServe(":8080", nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
+}
+func InitDB() {
+    _, err := db.Exec(`
+    CREATE TABLE IF NOT EXISTS Posts (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT NOT NULL,
+        title TEXT UNIQUE NOT NULL,
+        content TEXT NOT NULL
+    );
+    `)
+    if err != nil {
+        log.Fatal("Error creating Posts table: ", err)
+    }
 }
