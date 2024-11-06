@@ -55,6 +55,10 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {
+	_, err := r.Cookie("username")
+	if err == nil {
+		http.Redirect(w, r, "/home", http.StatusFound)
+	}
 	template, err := template.ParseFiles("../templates/pages/login.html")
 	if err != nil {
 		log.Fatal("error in page login")

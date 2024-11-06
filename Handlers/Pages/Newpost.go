@@ -1,7 +1,6 @@
 package app
 
 import (
-	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -26,30 +25,21 @@ func Newpost(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal("error in executing template of creating post")
 	}
-	// http.Redirect(w, r, "/home", 302)
 }
 
 func SubmitPost(w http.ResponseWriter, r *http.Request) {
 	post := Posts{Title: r.FormValue("title"), Content: r.FormValue("content")}
-	usename := `INSERT FROM User(username)`
-	_, err := db.Exec(`
-	CREATE TABLE IF NOT EXISTS Posts (
-		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		username TEXT UNIQUE NOT NULL,
-		title TEXT UNIQUE NOT NULL,
-		content TEXT UNIQUE NOT NULL
-	);
-	`)
-	p := `INSERT INTO Posts (username,title,content)
-	VALUES (?, ?)`
-	_, err = db.Exec(p, usename, post.Title, post.Content)
+	cookie, err := r.Cookie("username")
 	if err != nil {
-		log.Fatal("aji hnaya")
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+		return
 	}
+	username := cookie.Value
+	p := `INSERT INTO Posts (username, title, content) VALUES (?, ?, ?)`
+	_, err = db.Exec(p, username, post.Title, post.Content)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Error inserting post: ", err)
 	}
-	fmt.Println(post)
 
 	http.Redirect(w, r, "/home", http.StatusSeeOther)
 }

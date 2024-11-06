@@ -9,7 +9,7 @@
 <body>
     <header>
         <div class="header-container">
-            <h1>{.Name}</h1>
+            <h1>{{.Username}}</h1>
             <nav>
                 <ul class="nav-links">
                     <form action="/logout" method="post">
@@ -31,10 +31,10 @@
             {{ range .Posts }}
             <article class="post-item">
                 <h3>{{ .Title }}</h3>
-                <time datetime="{{ .CreatedAt }}">{{ .CreatedAt }}</time>
-                <p class="author">Posted by {{ .UserID }}</p>
                 <div class="content">{{ .Content }}</div>
             </article>
+            {{ else }}
+            <p>No posts yet. Start the conversation by creating a post!</p>
             {{ end }}
         </section>
     </main>
