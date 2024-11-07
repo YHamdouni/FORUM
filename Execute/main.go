@@ -48,7 +48,7 @@ func InitDB() {
 		category TEXT NOT NULL,
         title TEXT UNIQUE NOT NULL,
         content TEXT NOT NULL,
-		date DATE, 
+		date TEXT, 
 		time TIME
     );
     `)
