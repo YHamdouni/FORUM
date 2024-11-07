@@ -17,12 +17,11 @@
             </nav>
         </div>
     </header>
-    
 
     <main>
         <section class="forum-intro">
             <h2>Welcome to Your Account</h2>
-            <p>Join the conversation and share your ideas.</p>
+            <p>Engage in discussions and share your insights with our community.</p>
             <button class="create-post-btn" onclick="location.href='/createPost'">Create a Post</button>
         </section>
 
@@ -38,7 +37,7 @@
                 <p class="post-content">{{ .Content }}</p>
             </article>
             {{ else }}
-            <p>No posts yet. Start the conversation by creating a post!</p>
+            <p>No posts available at the moment. Be the first to contribute by creating a post!</p>
             {{ end }}
         </section>
     </main>
