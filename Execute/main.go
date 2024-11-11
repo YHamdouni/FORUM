@@ -5,6 +5,7 @@ import (
 	"log"
 	Files "main/Handlers/Files"
 	"net/http"
+	"os"
 
 	_ "github.com/mattn/go-sqlite3"
 )
