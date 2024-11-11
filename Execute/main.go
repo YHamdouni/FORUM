@@ -34,11 +34,20 @@ func main() {
 	}
 	InitDB()
 	Files.RegisterRoutes(db)
-	fmt.Println("Server running at http://localhost:8080")
-	err = http.ListenAndServe(":8080", nil)
-	if err != nil {
-		log.Fatal("ListenAndServe: ", err)
-	}
+	// fmt.Println("Server running at http://localhost:8080")
+	// err = http.ListenAndServe(":8080", nil)
+	// if err != nil {
+	// 	log.Fatal("ListenAndServe: ", err)
+	// }
+	port := os.Getenv("PORT")
+   	if port == "" {
+        port = "8080" // Default to port 8080 if not set
+        	log.Println("No PORT environment variable detected, defaulting to", port)
+    	}
+	log.Println("Starting server on port", port)
+    	if err := http.ListenAndServe(":" + port, nil); err != nil {
+        	log.Fatal(err)
+    	}
 }
 func InitDB() {
 	_, err := db.Exec(`
